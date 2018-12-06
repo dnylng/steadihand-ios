@@ -26,9 +26,9 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
     
     // Acceleration calc variables
     var time = 0.0
-    var acceleration = [Double](repeating: 0.0, count: 3)
-    var velocity = [Double](repeating: 0.0, count: 3)
-    var position = [Double](repeating: 0.0, count: 3)
+    var acceleration = [Double](repeating: 0.0, count: 2)
+    var velocity = [Double](repeating: 0.0, count: 2)
+    var position = [Double](repeating: 0.0, count: 2)
     
     // MARK:- UIViewController
     
@@ -56,41 +56,45 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
     // MARK:- Accelerometer updates
     
     func startDeviceMotionUpdates() {
-        if self.motionManager.isDeviceMotionAvailable, let queue = OperationQueue.current {
-            motionManager.startDeviceMotionUpdates(using: .xMagneticNorthZVertical, to: queue) { (data, error) in
-                if error != nil {
+        if motionManager.isDeviceMotionAvailable {
+            motionManager.deviceMotionUpdateInterval = 0.02
+            motionManager.startDeviceMotionUpdates(to: .main) { (data, error) in
+                guard let data = data, error == nil else {
                     NSLog("DEVICE MOTION ERROR: \(error?.localizedDescription ?? "Unable to read Device Motion updates")")
                     return
                 }
                 
-                if let x = data?.userAcceleration.x, let y = data?.userAcceleration.y, let z = data?.userAcceleration.z {
-                    let tempAcc = self.filteredAcceleration(x: x, y: y, z: z)
+                let x = 9.81 * data.userAcceleration.x, y = 9.81 * data.userAcceleration.y
+                let tempAcc = self.filteredAcceleration(x: x, y: y)
+                
+                self.acceleration = self.lowPassFilter(input: tempAcc, output: self.acceleration, alpha: Constants.LOW_PASS_FILTER_ALPHA)
+                
+                let timestamp = data.timestamp.magnitude
+                
+                if self.time == 0.0 {
+                    self.velocity = self.velocity.map { _ in 0.0 }
+                    self.position = self.position.map { _ in 0.0 }
+                    self.acceleration = self.filteredAcceleration(x: x, y: y)
                     
-                    self.acceleration = self.lowPassFilter(input: tempAcc, output: self.acceleration, alpha: Constants.LOW_PASS_FILTER_ALPHA)
+                } else {
+                    let dt = timestamp - self.time
                     
-                    guard let timestamp = data?.timestamp.magnitude else { return }
-                    
-                    if self.time != 0.0 {
-                        let dt = timestamp - self.time
+                    for i in 0...1 {
+                        self.velocity[i] += self.acceleration[i] * dt - Constants.VELOCITY_FRICTION * self.velocity[i]
+                        self.velocity[i] = self.fixNanOrInfinite(value: self.velocity[i])
                         
-                        for i in 0...2 {
-                            self.velocity[i] += self.acceleration[i] * dt - Constants.VELOCITY_FRICTION * self.velocity[i]
-                            self.velocity[i] = self.fixNanOrInfinite(value: self.velocity[i])
-                            
-                            self.position[i] += self.velocity[i] * dt * Constants.VELOCITY_AMPLIFICATION - Constants.POSITION_FRICTION * self.position[i]
-                            self.position[i] = self.rangeValue(value: self.position[i], min: -Constants.MAX_POS_SHIFT, max: Constants.MAX_POS_SHIFT)
-                        }
-                    } else {
-                        self.velocity = self.velocity.map { _ in 0.0 }
-                        self.position = self.position.map { _ in 0.0 }
-                        self.acceleration = self.filteredAcceleration(x: x, y: y, z: z)
+                        self.position[i] += self.velocity[i] * Constants.VELOCITY_AMPLIFICATION * dt - self.position[i] * Constants.POSITION_FRICTION
+                        self.position[i] = self.rangeValue(value: self.position[i], min: -Constants.MAX_POS_SHIFT, max: Constants.MAX_POS_SHIFT)
                     }
-                    
-                    self.time = timestamp
-                    self.translateView(x: CGFloat(self.position[0]), y: CGFloat(self.position[1]), z: CGFloat(self.position[2]))
-                    
-                    if self.printUpdates { print("DEVICE MOTION UPDATES: x: \(x), y: \(y), and z: \(z)") }
                 }
+                
+                self.time = timestamp
+                let test1 = CGFloat(self.position[0])
+                let test2 = CGFloat(-self.position[1])
+                self.translateViewX(x: test1)
+                self.translateViewY(y: test2)
+                
+                if self.printUpdates { print("ACCELERATION: x: \(x) and y: \(y)"); print("POSITION: x: \(self.position[0]) and y: \(self.position[1])") }
             }
         }
     }
@@ -131,12 +135,11 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
         return result
     }
     
-    func filteredAcceleration(x: Double, y: Double, z: Double) -> [Double] {
+    func filteredAcceleration(x: Double, y: Double) -> [Double] {
         let accelerationRange = -Constants.MAX_ACC...Constants.MAX_ACC
         let filteredX = accelerationRange.contains(x) ? x : self.acceleration[0]
-        let filteredY = accelerationRange.contains(y) ? x : self.acceleration[1]
-        let filteredZ = accelerationRange.contains(z) ? x : self.acceleration[2]
-        return [filteredX, filteredY, filteredZ]
+        let filteredY = accelerationRange.contains(y) ? y : self.acceleration[1]
+        return [filteredX, filteredY]
     }
     
     func rangeValue(value: Double, min: Double, max: Double) -> Double {
@@ -149,9 +152,12 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
         return (value.isNaN || value.isInfinite) ? 0 : value
     }
     
-    func translateView(x: CGFloat, y: CGFloat, z: CGFloat) {
-        scrollView.frame.origin.x += x
-        scrollView.frame.origin.y += y
+    func translateViewX(x: CGFloat) {
+        scrollView.frame.origin.x = x
+    }
+    
+    func translateViewY(y: CGFloat) {
+        scrollView.frame.origin.y = y
     }
     
     // MARK:- UITapGestures
