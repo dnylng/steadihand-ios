@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WRr-wQ-Z6V">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dIh-fD-A0X">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="P0s-mQ-SFX">
+            <objects>
+                <navigationController storyboardIdentifier="Steadihand" id="dIh-fD-A0X" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Iu3-9i-5an">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WRr-wQ-Z6V" kind="relationship" relationship="rootViewController" id="puD-xJ-9m9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="utx-t0-bqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1065" y="76"/>
+        </scene>
         <!--PDF View Controller-->
         <scene sceneID="Q7S-V0-ISd">
             <objects>
@@ -18,25 +35,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aKf-DT-DI9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aKf-DT-DI9" firstAttribute="top" secondItem="FBm-Qq-a2O" secondAttribute="top" id="2bc-7b-RCd"/>
-                            <constraint firstAttribute="trailing" secondItem="aKf-DT-DI9" secondAttribute="trailing" id="EUh-1s-QlE"/>
-                            <constraint firstItem="aKf-DT-DI9" firstAttribute="leading" secondItem="FBm-Qq-a2O" secondAttribute="leading" id="U0o-EC-wY7"/>
-                            <constraint firstAttribute="bottom" secondItem="aKf-DT-DI9" secondAttribute="bottom" id="Xim-0M-KeZ"/>
+                            <constraint firstItem="aKf-DT-DI9" firstAttribute="trailing" secondItem="qq8-XJ-Ule" secondAttribute="trailing" id="GNr-un-Hs8"/>
+                            <constraint firstItem="qq8-XJ-Ule" firstAttribute="bottom" secondItem="aKf-DT-DI9" secondAttribute="bottom" id="beE-pq-jGH"/>
+                            <constraint firstItem="aKf-DT-DI9" firstAttribute="leading" secondItem="qq8-XJ-Ule" secondAttribute="leading" id="cgd-to-Lpv"/>
+                            <constraint firstItem="aKf-DT-DI9" firstAttribute="top" secondItem="qq8-XJ-Ule" secondAttribute="top" id="nIh-Wh-RHb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qq8-XJ-Ule"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Steadihand" id="rEI-Sv-f0A"/>
                     <connections>
                         <outlet property="scrollView" destination="aKf-DT-DI9" id="rev-0d-qt9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hyE-kh-nJJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="680.79999999999995" y="113.79310344827587"/>
+            <point key="canvasLocation" x="-223.19999999999999" y="74.212893553223395"/>
         </scene>
     </scenes>
 </document>
