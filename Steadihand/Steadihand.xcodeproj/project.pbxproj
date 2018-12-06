@@ -105,9 +105,9 @@
 		9E54956C21397CBD00A98C51 /* Steadihand */ = {
 			isa = PBXGroup;
 			children = (
+				9EB0DA55215BF6AF002E24E9 /* UI */,
+				9EB0DA54215BF69C002E24E9 /* Application */,
 				9EF3A31B2152C1970021A8C4 /* Utils */,
-				9E54956D21397CBD00A98C51 /* AppDelegate.swift */,
-				9E54956F21397CBD00A98C51 /* PDFViewController.swift */,
 				9E54957121397CBD00A98C51 /* Main.storyboard */,
 				9E54957421397CC000A98C51 /* Assets.xcassets */,
 				9E54957621397CC000A98C51 /* LaunchScreen.storyboard */,
@@ -149,6 +149,22 @@
 				9E54959F2139928900A98C51 /* PDFKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9EB0DA54215BF69C002E24E9 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9E54956D21397CBD00A98C51 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		9EB0DA55215BF6AF002E24E9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9E54956F21397CBD00A98C51 /* PDFViewController.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		9EF3A31B2152C1970021A8C4 /* Utils */ = {
@@ -227,13 +243,16 @@
 				TargetAttributes = {
 					9E54956921397CBD00A98C51 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					9E54957D21397CC000A98C51 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 9E54956921397CBD00A98C51;
 					};
 					9E54958821397CC000A98C51 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 9E54956921397CBD00A98C51;
 					};
 				};
@@ -466,8 +485,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7395PLZ2Q7;
+				DEVELOPMENT_TEAM = P9Q5Q943HT;
 				INFOPLIST_FILE = Steadihand/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -476,7 +496,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dnylng.Steadihand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -485,8 +506,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7395PLZ2Q7;
+				DEVELOPMENT_TEAM = P9Q5Q943HT;
 				INFOPLIST_FILE = Steadihand/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -495,7 +517,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dnylng.Steadihand;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -506,7 +529,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7395PLZ2Q7;
+				DEVELOPMENT_TEAM = P9Q5Q943HT;
 				INFOPLIST_FILE = SteadihandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -515,7 +538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dnylng.SteadihandTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Steadihand.app/Steadihand";
 			};
@@ -527,7 +550,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7395PLZ2Q7;
+				DEVELOPMENT_TEAM = P9Q5Q943HT;
 				INFOPLIST_FILE = SteadihandTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -536,7 +559,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dnylng.SteadihandTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Steadihand.app/Steadihand";
 			};
@@ -547,7 +570,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7395PLZ2Q7;
+				DEVELOPMENT_TEAM = P9Q5Q943HT;
 				INFOPLIST_FILE = SteadihandUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -556,7 +579,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dnylng.SteadihandUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Steadihand;
 			};
@@ -567,7 +590,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7395PLZ2Q7;
+				DEVELOPMENT_TEAM = P9Q5Q943HT;
 				INFOPLIST_FILE = SteadihandUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -576,7 +599,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dnylng.SteadihandUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Steadihand;
 			};
