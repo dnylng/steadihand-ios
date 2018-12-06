@@ -64,27 +64,27 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
                     return
                 }
                 
-                let x = 9.81 * data.userAcceleration.x, y = 9.81 * data.userAcceleration.y
-                let tempAcc = self.filteredAcceleration(x: x, y: y)
+                let x = Utils.nearestHundreth(Constants.GRAVITY * data.userAcceleration.x), y = Utils.nearestHundreth(Constants.GRAVITY * data.userAcceleration.y)
+                let tempAcc = Utils.filteredAcceleration(acceleration: self.acceleration, x: x, y: y)
                 
-                self.acceleration = self.lowPassFilter(input: tempAcc, output: self.acceleration, alpha: Constants.LOW_PASS_FILTER_ALPHA)
+                self.acceleration = Utils.lowPassFilter(input: tempAcc, output: self.acceleration, alpha: Constants.LOW_PASS_FILTER_ALPHA)
                 
                 let timestamp = data.timestamp.magnitude
                 
                 if self.time == 0.0 {
                     self.velocity = self.velocity.map { _ in 0.0 }
                     self.position = self.position.map { _ in 0.0 }
-                    self.acceleration = self.filteredAcceleration(x: x, y: y)
+                    self.acceleration = Utils.filteredAcceleration(acceleration: self.acceleration, x: x, y: y)
                     
                 } else {
                     let dt = timestamp - self.time
                     
                     for i in 0...1 {
                         self.velocity[i] += self.acceleration[i] * dt - Constants.VELOCITY_FRICTION * self.velocity[i]
-                        self.velocity[i] = self.fixNanOrInfinite(value: self.velocity[i])
+                        self.velocity[i] = Utils.fixNanOrInfinite(value: self.velocity[i])
                         
                         self.position[i] += self.velocity[i] * Constants.VELOCITY_AMPLIFICATION * dt - self.position[i] * Constants.POSITION_FRICTION
-                        self.position[i] = self.rangeValue(value: self.position[i], min: -Constants.MAX_POS_SHIFT, max: Constants.MAX_POS_SHIFT)
+                        self.position[i] = Utils.rangeValue(value: self.position[i], min: -Constants.MAX_POS_SHIFT, max: Constants.MAX_POS_SHIFT)
                     }
                 }
                 
@@ -118,7 +118,7 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
     func populateScrollView() {
         for (index, page) in pages.enumerated() {
             let imageView = UIImageView()
-            imageView.contentMode = .scaleAspectFit
+            imageView.contentMode = .scaleToFill
             imageView.image = page
             let xPos = pageWidth * CGFloat(index)
             imageView.frame = CGRect(x: xPos, y: 0, width: pageWidth, height: pageHeight)
@@ -127,37 +127,12 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func lowPassFilter(input: [Double], output: [Double], alpha: Double) -> [Double] {
-        var result = output
-        for i in 0..<input.count {
-            result[i] = output[i] + alpha * (input[i] - output[i])
-        }
-        return result
-    }
-    
-    func filteredAcceleration(x: Double, y: Double) -> [Double] {
-        let accelerationRange = -Constants.MAX_ACC...Constants.MAX_ACC
-        let filteredX = accelerationRange.contains(x) ? x : self.acceleration[0]
-        let filteredY = accelerationRange.contains(y) ? y : self.acceleration[1]
-        return [filteredX, filteredY]
-    }
-    
-    func rangeValue(value: Double, min: Double, max: Double) -> Double {
-        if value > max { return max }
-        if value < min { return min }
-        return value
-    }
-    
-    func fixNanOrInfinite(value: Double) -> Double {
-        return (value.isNaN || value.isInfinite) ? 0 : value
-    }
-    
     func translateViewX(x: CGFloat) {
-        scrollView.frame.origin.x = x
+        scrollView.transform.tx = x
     }
     
     func translateViewY(y: CGFloat) {
-        scrollView.frame.origin.y = y
+        scrollView.transform.ty = y
     }
     
     // MARK:- UITapGestures
@@ -175,8 +150,8 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
         acceleration = acceleration.map { _ in 0.0 }
         time = 0
         
-        scrollView.frame.origin.x = 0
-        scrollView.frame.origin.y = 0
+        scrollView.transform.tx = 0
+        scrollView.transform.ty = 0
         
         print("Double tapped! Reset scroll view to the origin.")
     }
