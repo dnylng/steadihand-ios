@@ -47,7 +47,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qq8-XJ-Ule"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Steadihand" id="rEI-Sv-f0A"/>
+                    <navigationItem key="navigationItem" title="Steadihand" id="rEI-Sv-f0A">
+                        <barButtonItem key="rightBarButtonItem" title="settings" image="settings" landscapeImage="settings" largeContentSizeImage="settings" id="Lvo-ja-Q6T">
+                            <connections>
+                                <segue destination="GPc-cA-NaP" kind="show" id="LKI-VK-0Et"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="scrollView" destination="aKf-DT-DI9" id="rev-0d-qt9"/>
                     </connections>
@@ -56,5 +62,105 @@
             </objects>
             <point key="canvasLocation" x="-223.19999999999999" y="74.212893553223395"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="0CH-1J-UIV">
+            <objects>
+                <viewController id="GPc-cA-NaP" customClass="SettingsViewController" customModule="Steadihand" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bgu-Oa-Z16">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0g4-Vf-FQZ">
+                                <rect key="frame" x="52.5" y="158.5" width="270" height="350"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Velocity Friction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePG-dt-RJc">
+                                        <rect key="frame" x="74" y="0.0" width="122.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XiV-38-TBn">
+                                        <rect key="frame" x="-2" y="40" width="274" height="31"/>
+                                        <connections>
+                                            <action selector="handleVelocityFriction:" destination="GPc-cA-NaP" eventType="valueChanged" id="MF2-WC-In1"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position Friction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUs-dC-Bum">
+                                        <rect key="frame" x="73.5" y="80" width="123" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1cC-hh-iY8">
+                                        <rect key="frame" x="-2" y="120" width="274" height="31"/>
+                                        <connections>
+                                            <action selector="handlePositionFriction:" destination="GPc-cA-NaP" eventType="valueChanged" id="AaW-oV-Pnb"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low Pass Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Clj-9o-mPV">
+                                        <rect key="frame" x="78" y="160" width="114" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="QCI-F5-7je">
+                                        <rect key="frame" x="-2" y="200" width="274" height="31"/>
+                                        <connections>
+                                            <action selector="handleLowPassFilter:" destination="GPc-cA-NaP" eventType="valueChanged" id="Gg1-eu-3Il"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Velocity Amplification" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRM-FG-Ceb">
+                                        <rect key="frame" x="52.5" y="240" width="165" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="mbD-8H-bnV">
+                                        <rect key="frame" x="-2" y="280" width="274" height="31"/>
+                                        <connections>
+                                            <action selector="handleVelocityAmplification:" destination="GPc-cA-NaP" eventType="valueChanged" id="gqO-YY-3Ar"/>
+                                        </connections>
+                                    </slider>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXW-mM-8yR">
+                                        <rect key="frame" x="110" y="320" width="50" height="30"/>
+                                        <state key="normal" title="Default"/>
+                                        <connections>
+                                            <action selector="handleDefaults:" destination="GPc-cA-NaP" eventType="touchUpInside" id="1sT-cS-rst"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="QCI-F5-7je" firstAttribute="leading" secondItem="0g4-Vf-FQZ" secondAttribute="leading" id="1Gz-fZ-tUa"/>
+                                    <constraint firstItem="mbD-8H-bnV" firstAttribute="leading" secondItem="0g4-Vf-FQZ" secondAttribute="leading" id="Kv0-D2-0mp"/>
+                                    <constraint firstItem="XiV-38-TBn" firstAttribute="leading" secondItem="0g4-Vf-FQZ" secondAttribute="leading" id="N8Q-Qw-AcU"/>
+                                    <constraint firstAttribute="trailing" secondItem="QCI-F5-7je" secondAttribute="trailing" id="OU6-tF-IZY"/>
+                                    <constraint firstItem="1cC-hh-iY8" firstAttribute="leading" secondItem="0g4-Vf-FQZ" secondAttribute="leading" id="UBx-SZ-sBP"/>
+                                    <constraint firstAttribute="trailing" secondItem="1cC-hh-iY8" secondAttribute="trailing" id="iOs-Bl-e6I"/>
+                                    <constraint firstAttribute="trailing" secondItem="XiV-38-TBn" secondAttribute="trailing" id="nK2-Xk-bMd"/>
+                                    <constraint firstAttribute="trailing" secondItem="mbD-8H-bnV" secondAttribute="trailing" id="vPh-Bv-M3h"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0g4-Vf-FQZ" firstAttribute="centerY" secondItem="bgu-Oa-Z16" secondAttribute="centerY" id="2Mj-SN-94v"/>
+                            <constraint firstItem="0g4-Vf-FQZ" firstAttribute="centerX" secondItem="bgu-Oa-Z16" secondAttribute="centerX" id="gRW-Fn-iXh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SRT-Ha-lke"/>
+                    </view>
+                    <connections>
+                        <outlet property="lowPassFilterSlider" destination="QCI-F5-7je" id="jPH-lK-eZG"/>
+                        <outlet property="positionFrictionSlider" destination="1cC-hh-iY8" id="2Ea-Ki-DB6"/>
+                        <outlet property="velocityAmplicationSlider" destination="mbD-8H-bnV" id="2dv-8Q-sn3"/>
+                        <outlet property="velocityFrictionSlider" destination="XiV-38-TBn" id="kwh-TU-AUJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iMP-qb-iRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="534" y="75"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="settings" width="22.5" height="22.5"/>
+    </resources>
 </document>

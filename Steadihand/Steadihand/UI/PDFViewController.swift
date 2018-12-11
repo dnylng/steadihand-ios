@@ -67,7 +67,7 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
                 let x = Utils.nearestHundreth(Constants.GRAVITY * data.userAcceleration.x), y = Utils.nearestHundreth(Constants.GRAVITY * data.userAcceleration.y)
                 let tempAcc = Utils.filteredAcceleration(acceleration: self.acceleration, x: x, y: y)
                 
-                self.acceleration = Utils.lowPassFilter(input: tempAcc, output: self.acceleration, alpha: Constants.LOW_PASS_FILTER_ALPHA)
+                self.acceleration = Utils.lowPassFilter(input: tempAcc, output: self.acceleration, alpha: Settings.shared.lowPassFilter)
                 
                 let timestamp = data.timestamp.magnitude
                 
@@ -80,10 +80,10 @@ class PDFViewController: UIViewController, UIScrollViewDelegate {
                     let dt = timestamp - self.time
                     
                     for i in 0...1 {
-                        self.velocity[i] += self.acceleration[i] * dt - Constants.VELOCITY_FRICTION * self.velocity[i]
+                        self.velocity[i] += self.acceleration[i] * dt - Settings.shared.velFriction * self.velocity[i]
                         self.velocity[i] = Utils.fixNanOrInfinite(value: self.velocity[i])
                         
-                        self.position[i] += self.velocity[i] * Constants.VELOCITY_AMPLIFICATION * dt - self.position[i] * Constants.POSITION_FRICTION
+                        self.position[i] += self.velocity[i] * Settings.shared.velAmplication * dt - self.position[i] * Settings.shared.posFriction
                         self.position[i] = Utils.rangeValue(value: self.position[i], min: -Constants.MAX_POS_SHIFT, max: Constants.MAX_POS_SHIFT)
                     }
                 }
