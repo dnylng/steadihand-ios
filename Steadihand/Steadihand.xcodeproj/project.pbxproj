@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9E45FA4A21B9CE1200478395 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45FA4921B9CE1200478395 /* Utils.swift */; };
+		9E45FA4C21B9E1A500478395 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45FA4B21B9E1A500478395 /* SettingsViewController.swift */; };
+		9E45FA4E21B9E2E400478395 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E45FA4D21B9E2E400478395 /* Settings.swift */; };
 		9E54956E21397CBD00A98C51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E54956D21397CBD00A98C51 /* AppDelegate.swift */; };
 		9E54957021397CBD00A98C51 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E54956F21397CBD00A98C51 /* PDFViewController.swift */; };
 		9E54957321397CBD00A98C51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E54957121397CBD00A98C51 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		9E45FA4921B9CE1200478395 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		9E45FA4B21B9E1A500478395 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		9E45FA4D21B9E2E400478395 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		9E54956A21397CBD00A98C51 /* Steadihand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Steadihand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E54956D21397CBD00A98C51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E54956F21397CBD00A98C51 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				9E54956F21397CBD00A98C51 /* PDFViewController.swift */,
+				9E45FA4B21B9E1A500478395 /* SettingsViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 			children = (
 				9EF3A31C2152C1A50021A8C4 /* Constants.swift */,
 				9E45FA4921B9CE1200478395 /* Utils.swift */,
+				9E45FA4D21B9E2E400478395 /* Settings.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -313,9 +319,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E45FA4E21B9E2E400478395 /* Settings.swift in Sources */,
 				9E54957021397CBD00A98C51 /* PDFViewController.swift in Sources */,
 				9E54956E21397CBD00A98C51 /* AppDelegate.swift in Sources */,
 				9EF3A31D2152C1A50021A8C4 /* Constants.swift in Sources */,
+				9E45FA4C21B9E1A500478395 /* SettingsViewController.swift in Sources */,
 				9E45FA4A21B9CE1200478395 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
